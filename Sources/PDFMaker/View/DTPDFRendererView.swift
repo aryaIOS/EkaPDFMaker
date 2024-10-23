@@ -32,8 +32,7 @@ public struct DTPDFRendererView: View {
         DTComponentView(index: index, component: component)
       }
     }
-    .padding(.top, EkaSpacing.spacingS)
-    .padding(.bottom, EkaSpacing.spacingXs)
+    .padding(.vertical, EkaSpacing.spacingXxxs)
     .padding(.horizontal, EkaSpacing.spacingL)
     .frame(maxWidth: pageSize.width)
   }
