@@ -7,7 +7,7 @@ import Foundation
 public enum PageSizing {
   case a4
   
-  var pageSize: CGSize {
+  public var pageSize: CGSize {
     switch self {
     case .a4:
       return CGSize(width: 595.2 , height: 841.8)
@@ -159,7 +159,7 @@ public struct PDFRenderer {
     return url
   }
   
-  func renderSinglePage(
+  public func renderSinglePage(
     urlPathString: String = UrlPath.url,
     headerView: AnyView = AnyView(DTPDFHeaderView(data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData(
       doctorName: "Dr. Kunal Katre",
@@ -249,7 +249,7 @@ public struct PDFRenderer {
 @MainActor
 @available(iOS 16.0, *)
 extension PDFRenderer {
-  func calculateHeight(for view: some View, givenWidth width: CGFloat) -> CGFloat {
+  public func calculateHeight(for view: some View, givenWidth width: CGFloat) -> CGFloat {
     // 1. Create a UIHostingController with the SwiftUI view
     let hostingController = UIHostingController(rootView: view)
     
