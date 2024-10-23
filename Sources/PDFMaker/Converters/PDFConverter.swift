@@ -260,6 +260,11 @@ extension PDFRenderer {
     // 2. Add the view to a temporary container for layout
     let targetSize = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
     
+    // 3. Ensure the view is laid out properly by forcing it into the view hierarchy temporarily
+    let window = UIWindow()
+    window.rootViewController = hostingController
+    window.makeKeyAndVisible()
+    
     // 3. Set the preferred content size or use systemLayoutSizeFitting to calculate the size
     let size = hostingController.view.systemLayoutSizeFitting(targetSize,
                                                               withHorizontalFittingPriority: .required,
