@@ -4,7 +4,7 @@ import SwiftUI
 import EkaUI
 
 @available(iOS 16.0, *)
-struct DTPDFRendererView: View {
+public struct DTPDFRendererView: View {
   
   let response: DTPageResponse
   let components: [DTListComponent]
@@ -17,14 +17,14 @@ struct DTPDFRendererView: View {
   /// Additional offset for allowing component to push a little bit more in the next page
 //  let componentNextPagePaddingPushAdditionalOffset: CGFloat = 10
   
-  init(response: DTPageResponse) {
+  public init(response: DTPageResponse) {
     self.response = response
     self.components = DTListComponent.formAnyDTComponentsForAvailableData(components: response.data?.pageComponents)
 //    _componentsHeight = State(initialValue: Array(repeating: CGFloat(0), count: components.count))
 //    _componentTopPaddingHeight = State(initialValue: Array(repeating: CGFloat(0), count: components.count))
   }
   
-  var body: some View {
+  public var body: some View {
     VStack(spacing: 0) {
       ForEach(Array(components.enumerated()), id: \.element.id) { index, component in
         DTComponentView(index: index, component: component)

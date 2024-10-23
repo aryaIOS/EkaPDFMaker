@@ -9,7 +9,7 @@ enum DeepThoughtPageType: String {
 }
 
 // MARK: - DTPageResponse
-struct DTPageResponse: Decodable {
+public struct DTPageResponse: Decodable {
   let success: Bool?
   let data: PageData?
   let errorEvent: String?
