@@ -1,0 +1,1100 @@
+{
+  "success": true,
+  "data": {
+    "page_type": "default",
+    "page_details": {
+      "page_title": {
+        "comp_id": "P-TITL",
+        "title": "Prescription Smart Notes"
+      },
+      "page_ctas": {
+        "primary": {
+          "value": "Save",
+          "style": {
+            "type": "primary"
+          },
+          "cta": {
+            "pid": "deepthought_page",
+            "params": {
+              "context": "{\"care_context_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+              "page_type": "fhir-checkout-page"
+            }
+          }
+        },
+        "secondary": {
+          "value": "Add More Notes",
+          "style": {
+            "type": "secondary"
+          },
+          "cta": {
+            "pid": "self_assessment",
+            "params": {
+              "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+              "wflow_id": 3964,
+              "skip_profile": true
+            }
+          }
+        }
+      }
+    },
+    "page_components": [
+      {
+        "comp_code": "P-LBRK",
+        "size": 12
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "title_3",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Diagnosis History"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 4
+      },
+      {
+        "comp_code": "P-CARD",
+        "card_icon": null,
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "sub_headline",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Diabetes mellitus type II"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "callout",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Since: Since: 15 October 2021"
+            }
+          }
+        ],
+        "cta": null,
+        "right_icon": null,
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 6
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 12
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "title_3",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Vitals"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 4
+      },
+      {
+        "comp_code": "P-PAIR",
+        "items": [
+          {
+            "key": "Pulse rate",
+            "value": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "120.0 /min"
+            }
+          },
+          {
+            "key": "Blood pressure",
+            "value": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "120.0 | 60.0 mmHg"
+            }
+          },
+          {
+            "key": "Body height",
+            "value": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "165.0 Cms"
+            }
+          },
+          {
+            "key": "Body mass index",
+            "value": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "18.0 kg/m2"
+            }
+          },
+          {
+            "key": "Diastolic blood pressure",
+            "value": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "56.0 mmHg"
+            }
+          }
+        ],
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 6
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Add Vitals",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3950,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "primary"
+        }
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Delete Vitals",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3956,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "secondary"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 12
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "title_3",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Lab Results"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 4
+      },
+      {
+        "comp_code": "P-PAIR",
+        "items": [
+          {
+            "key": "Vitamin B12",
+            "value": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "300.0 pg/mL"
+            }
+          },
+          {
+            "key": "HbA1c (Glycosylated Hemoglobin)",
+            "value": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "6.0 %"
+            }
+          }
+        ],
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 6
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Add Lab Results",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3949,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "primary"
+        }
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Delete Lab Results",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3959,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "secondary"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 12
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "title_3",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Symptoms"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 4
+      },
+      {
+        "comp_code": "P-CARD",
+        "card_icon": null,
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "sub_headline",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "fever"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "callout",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Since: Since: 12 October 2024"
+            }
+          }
+        ],
+        "cta": null,
+        "right_icon": null,
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-CARD",
+        "card_icon": null,
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "sub_headline",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "pain in throat"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "callout",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Since: Since: 05 October 2024 • Severe"
+            }
+          }
+        ],
+        "cta": null,
+        "right_icon": null,
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-CARD",
+        "card_icon": null,
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "sub_headline",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Disease caused by 2019 novel coronavirus"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "callout",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Since: Since: 17 October 2024 • Moderate"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "callout",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Notes: Frank"
+            }
+          }
+        ],
+        "cta": null,
+        "right_icon": null,
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 6
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Add Symptoms",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3946,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "primary"
+        }
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Delete Symptoms",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3955,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "secondary"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 12
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "title_3",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Diagnosis"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 4
+      },
+      {
+        "comp_code": "P-CARD",
+        "card_icon": null,
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "sub_headline",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Influenza"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "callout",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Since: Since: 08 October 2024"
+            }
+          }
+        ],
+        "cta": null,
+        "right_icon": null,
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-CARD",
+        "card_icon": null,
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "sub_headline",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Amyotrophy due to type 2 diabetes mellitus"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "callout",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Since: Since: 17 October 2024"
+            }
+          }
+        ],
+        "cta": null,
+        "right_icon": null,
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 6
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Add Diagnosis",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3945,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "primary"
+        }
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Delete Diagnosis",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3954,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "secondary"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 12
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "title_3",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Lab Investigation"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 4
+      },
+      {
+        "comp_code": "P-LIST",
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Complete Blood Count (CBC)"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Vitamin B12"
+            }
+          }
+        ],
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 6
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Add Lab Investigation",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3944,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "primary"
+        }
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Delete Lab Investigation",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3952,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "secondary"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 12
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "title_3",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Medicine"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 4
+      },
+      {
+        "comp_code": "P-CARD",
+        "card_icon": "https://deepthought-cdn.eka.care/prescription/medication/icons/tablet.png",
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "sub_headline",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Dolo 500 Tablet"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "callout",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "3 tablet • 1-0-1 • Every 1 Day"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "footnote",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "For 1 Day(s) • After Food"
+            }
+          }
+        ],
+        "cta": null,
+        "right_icon": null,
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-CARD",
+        "card_icon": "https://deepthought-cdn.eka.care/prescription/medication/icons/tablet.png",
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "sub_headline",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Allegra 120mg Tablet"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "callout",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "1 tablet • twice a month • Every 1 Month"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "footnote",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "For 5 Month(s) • After Meal"
+            }
+          }
+        ],
+        "cta": null,
+        "right_icon": null,
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-CARD",
+        "card_icon": "https://deepthought-cdn.eka.care/prescription/medication/icons/tablet.png",
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "sub_headline",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Zincovit  Tablet"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "callout",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "2 tablet"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "footnote",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "For 3 Day(s) • After Meal"
+            }
+          }
+        ],
+        "cta": null,
+        "right_icon": null,
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 6
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Add Medicine",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3951,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "primary"
+        }
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Delete Medicine",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3953,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "secondary"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 12
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "title_3",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Follow-up Appointment"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 4
+      },
+      {
+        "comp_code": "P-LIST",
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Follow-up at: 13 March 2025"
+            }
+          }
+        ],
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 6
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 12
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "title_3",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Advices"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 4
+      },
+      {
+        "comp_code": "P-LIST",
+        "items": [
+          {
+            "text": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "stop using earphones a lot"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Work hard"
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Please take some rest."
+            }
+          },
+          {
+            "text": {
+              "style": {
+                "txt_style": "body",
+                "txt_color": "#111B31",
+                "txt_align": "left"
+              },
+              "value": "Had"
+            }
+          }
+        ],
+        "style": {
+          "elevated": true
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 6
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Add Advices",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3947,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "primary"
+        }
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Delete Advices",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3957,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "secondary"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 12
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "title_3",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Notes"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 4
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "body",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "<p>dgvsdgcgyxzc&nbsp; gsdcuy&nbsp; wyjsdgys adgyegds zgdsy sdfgedgydydfcgyedggy asg edfygyegfdy scyz gcgsdy ydygf gdygc&nbsp; syd csdgyds</p>"
+        }
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "body",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "Back"
+        }
+      },
+      {
+        "comp_code": "P-LBRK",
+        "size": 6
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Add Notes",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3948,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "primary"
+        }
+      },
+      {
+        "comp_code": "P-BUTN",
+        "value": "Delete Notes",
+        "l_icon": null,
+        "r_icon": null,
+        "cta": {
+          "pid": "self_assessment",
+          "params": {
+            "wflow_id": 3962,
+            "skip_profile": true,
+            "context": "{\"rx_id\":\"P-DW-45353D50-0116-5040-86D3-7C2373FE64C6\"}",
+            "action": "push"
+          }
+        },
+        "style": {
+          "type": "secondary"
+        }
+      },
+      {
+        "comp_code": "P-TEXT",
+        "text": {
+          "style": {
+            "txt_style": "footnote",
+            "txt_color": "#111B31",
+            "txt_align": "left"
+          },
+          "value": "RxId: P-DW-45353D50-0116-5040-86D3-7C2373FE64C6"
+        }
+      }
+    ]
+  }
+}
