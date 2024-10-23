@@ -17,8 +17,10 @@ public struct DTPDFRendererView: View {
   /// Additional offset for allowing component to push a little bit more in the next page
 //  let componentNextPagePaddingPushAdditionalOffset: CGFloat = 10
   
-  public init(response: DTPageResponse) {
-    self.response = response
+  public init(
+    data: Data
+  ) {
+    self.response = DTPageResponse.formDTPageResponse(data: data)
     self.components = DTListComponent.formAnyDTComponentsForAvailableData(components: response.data?.pageComponents)
 //    _componentsHeight = State(initialValue: Array(repeating: CGFloat(0), count: components.count))
 //    _componentTopPaddingHeight = State(initialValue: Array(repeating: CGFloat(0), count: components.count))
@@ -102,28 +104,36 @@ extension DTPDFRendererView {
 }
 
 extension DTPageResponse {
-  static func formMockDTPageResponse() -> DTPageResponse {
+  public static func formDTPageResponse(data: Data) -> DTPageResponse {
+    do {
+      let decoder = JSONDecoder()
+      let dtPageResponse = try decoder.decode(DTPageResponse.self, from: data)
+      return dtPageResponse
+    } catch {
+      print("Error loading or decoding JSON :\(error)")
+    }
+    return DTPageResponse(success: nil, data: nil, errorEvent: nil)
+  }
+  
+  static func formMockDTData() -> Data {
     let fileName = "DptData"
     if let filePath = Bundle.main.path(forResource: fileName, ofType: "json") {
       do {
         /// Load the contents of the json
         let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
-        // 3. Use JSONDecoder to decode the data into your Swift struct
-        let decoder = JSONDecoder()
-        let dtPageResponse = try decoder.decode(DTPageResponse.self, from: data)
-        return dtPageResponse
+        return data
       } catch {
         print("Error loading or decoding JSON :\(error)")
       }
     }
     print("Loading nil dt page response")
-    return DTPageResponse(success: nil, data: nil, errorEvent: nil)
+    return Data()
   }
 }
 
 @available(iOS 16.0, *)
 #Preview {
   ScrollView {
-    DTPDFRendererView(response: DTPageResponse.formMockDTPageResponse())
+    DTPDFRendererView(data: DTPageResponse.formMockDTData())
   }
 }
