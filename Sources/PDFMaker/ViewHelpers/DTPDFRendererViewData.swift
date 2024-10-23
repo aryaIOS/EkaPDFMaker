@@ -35,7 +35,7 @@ extension DTListComponent {
     components.forEach { component in
       if let compCode = component.compCode,
          /// Add the component only if its available type
-         let availableComponentType = DTPDFAvailableComponentType(rawValue: compCode) {
+         let _ = DTPDFAvailableComponentType(rawValue: compCode) {
         listComponents.append(DTListComponent(component))
       }
     }
@@ -45,16 +45,20 @@ extension DTListComponent {
 
 // MARK: - Header Data
 
-struct DTPDFHeaderViewData {
+public struct DTPDFHeaderViewData {
   let name, clinicName, address: String?
 }
 
 extension DTPDFHeaderViewData {
-  static func formDeepthoughtHeaderViewData() -> DTPDFHeaderViewData {
+  public static func formDeepthoughtHeaderViewData(
+    doctorName: String?,
+    clinicName: String?,
+    address: String?
+  ) -> DTPDFHeaderViewData {
     DTPDFHeaderViewData(
-      name: "Dr. Kunal Katre",
-      clinicName: "Kunal Clinic",
-      address: "Bangalore"
+      name: doctorName ?? "",
+      clinicName: clinicName ?? "",
+      address: address ?? ""
     )
   }
 }

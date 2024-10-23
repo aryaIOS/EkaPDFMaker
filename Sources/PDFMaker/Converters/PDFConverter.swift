@@ -4,7 +4,7 @@ import PDFKit
 import SwiftUI
 import Foundation
 
-enum PageSizing {
+public enum PageSizing {
   case a4
   
   var pageSize: CGSize {
@@ -15,13 +15,13 @@ enum PageSizing {
   }
 }
 
-enum UrlPath {
-  static let url = "\(UUID().uuidString).pdf"
+public enum UrlPath {
+  public static let url = "\(UUID().uuidString).pdf"
 }
 
 @MainActor
 @available(iOS 16.0, *)
-struct PDFRenderer {
+public struct PDFRenderer {
   /// Used to render
   /// - Parameter view: The SwiftUI View that you want to be rendered
   /// - Parameter urlPathString:The path at which the pdf is to be updated
@@ -88,9 +88,17 @@ struct PDFRenderer {
 //    return url
 //  }
   
-  func renderSinglePageWithoutA4Constraints(
+  public func renderSinglePageWithoutA4Constraints(
     urlPathString: String = UrlPath.url,
-    headerView: AnyView = AnyView(DTPDFHeaderView(data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData())),
+    headerView: AnyView = AnyView(
+      DTPDFHeaderView(
+        data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData(
+          doctorName: "Dr. Kunal Katre",
+          clinicName: "Kunal's clinic",
+          address: "Bangalore"
+        )
+      )
+    ),
     bodyView: AnyView
   ) -> URL {
     let width = PageSizing.a4.pageSize.width
@@ -153,7 +161,11 @@ struct PDFRenderer {
   
   func renderSinglePage(
     urlPathString: String = UrlPath.url,
-    headerView: AnyView = AnyView(DTPDFHeaderView(data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData())),
+    headerView: AnyView = AnyView(DTPDFHeaderView(data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData(
+      doctorName: "Dr. Kunal Katre",
+      clinicName: "Kunal's clinic",
+      address: "Bangalore"
+    ))),
     bodyView: AnyView
   ) -> URL {
     let pageSize = PageSizing.a4.pageSize

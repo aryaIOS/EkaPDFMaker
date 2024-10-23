@@ -3,12 +3,16 @@
 import SwiftUI
 import EkaUI
 
-struct DTPDFHeaderView: View {
+public struct DTPDFHeaderView: View {
   
-  let data: DTPDFHeaderViewData
+  public let data: DTPDFHeaderViewData
   let pageSize = PageSizing.a4.pageSize
   
-  var body: some View {
+  public init(data: DTPDFHeaderViewData) {
+    self.data = data
+  }
+  
+  public var body: some View {
     VStack {
       HStack(alignment: .top) {
         Image(.doctorPdfHeader)
@@ -48,5 +52,11 @@ struct DTPDFHeaderView: View {
 }
 
 #Preview {
-  DTPDFHeaderView(data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData())
+  DTPDFHeaderView(
+    data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData(
+      doctorName: "Dr. Kunal Katre",
+      clinicName: "Kunal's clinic",
+      address: "Bangalore"
+    )
+  )
 }
