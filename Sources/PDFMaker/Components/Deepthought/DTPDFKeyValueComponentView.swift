@@ -42,7 +42,8 @@ extension DTPDFKeyValueComponentView {
         /// Key
         if let key = item.key {
           Text(key)
-            .textStyle(ekaFont: .body2Regular, color: .text03)
+            .textStyle(ekaFont: .label1Regular, color: .text03)
+            .fixedSize(horizontal: false, vertical: true)
         }
         /// Value
         if let value = item.value,
@@ -50,6 +51,7 @@ extension DTPDFKeyValueComponentView {
            let style = value.style {
           Text(valueString)
             .textStyle(dtTextStyle: style)
+            .fixedSize(horizontal: false, vertical: true)
         }
         Spacer()
       }

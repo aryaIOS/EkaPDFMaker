@@ -35,6 +35,7 @@ public struct DTPDFRendererView: View {
     .padding(.vertical, EkaSpacing.spacingXxxs)
     .padding(.horizontal, EkaSpacing.spacingL)
     .frame(maxWidth: pageSize.width)
+    .edgesIgnoringSafeArea(.all)
   }
 }
 

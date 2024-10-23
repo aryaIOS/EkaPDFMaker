@@ -110,6 +110,9 @@ public struct PDFRenderer {
     let bodyHeight = calculateHeight(for: AnyView(bodyView), givenWidth: width)
     let height = headerHeight + bodyHeight
     
+    print("Header height is \(headerHeight)")
+    print("Body Height is \(bodyHeight)")
+    
     // Create an ImageRenderer for both the header and the content
     let headerRenderer = ImageRenderer(
       content: headerView.scaleEffect( /// To flip view upside down
@@ -253,23 +256,13 @@ public struct PDFRenderer {
 @MainActor
 @available(iOS 16.0, *)
 extension PDFRenderer {
-  public func calculateHeight(for view: some View, givenWidth width: CGFloat) -> CGFloat {
-    // 1. Create a UIHostingController with the SwiftUI view
+  func calculateHeight(for view: some View, givenWidth width: CGFloat) -> CGFloat {
     let hostingController = UIHostingController(rootView: view)
     
-    // 2. Add the view to a temporary container for layout
-    let targetSize = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
+    hostingController.view.setNeedsLayout()
+    hostingController.view.layoutIfNeeded()
     
-    // 3. Ensure the view is laid out properly by forcing it into the view hierarchy temporarily
-    let window = UIWindow()
-    window.rootViewController = hostingController
-    window.makeKeyAndVisible()
-    
-    // 3. Set the preferred content size or use systemLayoutSizeFitting to calculate the size
-    let size = hostingController.view.systemLayoutSizeFitting(targetSize,
-                                                              withHorizontalFittingPriority: .required,
-                                                              verticalFittingPriority: .fittingSizeLevel)
-    
-    return size.height
+    let intrinsicSize = hostingController.view.intrinsicContentSize
+    return intrinsicSize.height
   }
 }
