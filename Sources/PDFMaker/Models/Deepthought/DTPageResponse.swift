@@ -29,6 +29,7 @@ public struct DTPageResponse: Decodable {
     let pageComponents: [DTAnyComponent]?
     let track: Track?
     let shouldShowGoogleAd: Bool?
+    let generatePdf: Bool?
     
     enum CodingKeys: String, CodingKey {
       case rawPageType = "page_type"
@@ -38,6 +39,7 @@ public struct DTPageResponse: Decodable {
       case pageComponents = "page_components"
       case track
       case shouldShowGoogleAd = "should_show_google_ad"
+      case generatePdf = "generate_pdf"
     }
     
     var pageType: DeepThoughtPageType? {
@@ -58,6 +60,7 @@ public struct DTPageResponse: Decodable {
       } else {
         self.pageComponents = nil
       }
+      self.generatePdf = try container.decodeIfPresent(Bool.self, forKey: DTPageResponse.PageData.CodingKeys.generatePdf)
     }
   }
   

@@ -23,9 +23,8 @@ public enum UrlPath {
 @available(iOS 16.0, *)
 public struct PDFRenderer {
   
-  public init() {
-    
-  }
+  public init() {}
+  
   /// Used to render
   /// - Parameter view: The SwiftUI View that you want to be rendered
   /// - Parameter urlPathString:The path at which the pdf is to be updated
