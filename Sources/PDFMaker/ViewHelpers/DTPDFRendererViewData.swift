@@ -20,16 +20,15 @@ struct DTListComponent: Identifiable {
 }
 
 extension DTListComponent {
-//  static func formAnyDTComponent(components: [DTAnyComponent]?) -> [DTListComponent] {
-//    var listComponents: [DTListComponent] = []
-//    guard let components else { return listComponents }
-//    components.forEach { anyComponent in
-//      listComponents.append(DTListComponent(anyComponent))
-//    }
-//    return listComponents
-//  }
-  
-  static func formAnyDTComponentsForAvailableData(components: [DTAnyComponent]?) -> [DTListComponent] {
+  static func formAnyDTComponentsForAvailableData(response: DTPageResponse) -> [DTListComponent] {
+    var components: [DTAnyComponent]?
+    switch response.data?.pageType {
+    case .defaultPage:
+      components = response.data?.pageComponents
+    case .tab:
+      components = formComponentsForTab(response: response)
+    default: break
+    }
     var listComponents: [DTListComponent] = []
     guard let components else { return listComponents }
     components.forEach { component in
@@ -40,6 +39,11 @@ extension DTListComponent {
       }
     }
     return listComponents
+  }
+  
+  private static func formComponentsForTab(response: DTPageResponse) -> [DTAnyComponent] {
+    guard let firstTabComponentData = response.data?.tab?.details?.tabs?.first?.pageComponents else { return [] }
+    return firstTabComponentData
   }
 }
 
