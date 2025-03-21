@@ -263,6 +263,6 @@ extension PDFRenderer {
     let hostingController = UIHostingController(rootView: view)
     let targetSize = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
     let fittingSize = hostingController.view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-    return fittingSize.height
+    return fittingSize.height + 10 /// Extra for cutting
   }
 }
