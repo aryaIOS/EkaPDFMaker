@@ -262,25 +262,10 @@ extension PDFRenderer {
     // Create a hosting controller to render the SwiftUI view
     let hostingController = UIHostingController(rootView: view)
     
-    // Get the hosting controller's view
-    let hostingView = hostingController.view!
+    hostingController.view.setNeedsLayout()
+    hostingController.view.layoutIfNeeded()
     
-    // Set constraints for the hosting view with the given width
-    hostingView.translatesAutoresizingMaskIntoConstraints = false
-    hostingView.widthAnchor.constraint(equalToConstant: width).isActive = true
-    
-    // Size the hosting view to fit its content
-    hostingView.setNeedsLayout()
-    hostingView.layoutIfNeeded()
-    
-    // Calculate the fitting size
-    let size = hostingView.systemLayoutSizeFitting(
-      CGSize(width: width, height: UIView.layoutFittingCompressedSize.height),
-      withHorizontalFittingPriority: .required,
-      verticalFittingPriority: .fittingSizeLevel
-    )
-    
-    // Return the calculated height
-    return size.height
+    let intrinsicSize = hostingController.view.intrinsicContentSize
+    return intrinsicSize.height
   }
 }
