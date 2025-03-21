@@ -179,7 +179,7 @@ public struct PDFRenderer {
     // TODO: - Arya break this to separate function
     /// 2: Save the rendered content to the documents directory
     let url = URL.documentsDirectory.appending(path: urlPathString)
-    let bodyHeight = calculateHeight(for: bodyView, givenWidth: pageSize.width)
+    let bodyHeight = calculateHeight(for: finalBodyView, givenWidth: pageSize.width)
     
     print("Body height is \(bodyHeight)")
     
