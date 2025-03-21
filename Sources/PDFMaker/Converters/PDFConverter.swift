@@ -186,6 +186,8 @@ public struct PDFRenderer {
     /// Height of header
     let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: pageSize.width)
     
+    print("Header height is \(headerHeight)")
+    
     /// Available height for the body
     let availableHeight = pageSize.height - headerHeight
     
