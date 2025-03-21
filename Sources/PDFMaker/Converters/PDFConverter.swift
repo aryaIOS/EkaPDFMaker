@@ -259,13 +259,28 @@ public struct PDFRenderer {
 @available(iOS 16.0, *)
 extension PDFRenderer {
   func calculateHeight(for view: some View, givenWidth width: CGFloat) -> CGFloat {
+    // Create a hosting controller to render the SwiftUI view
     let hostingController = UIHostingController(rootView: view)
-    let targetSize = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
-    let fittingSize = hostingController.view.systemLayoutSizeFitting(
-      targetSize,
+    
+    // Get the hosting controller's view
+    let hostingView = hostingController.view!
+    
+    // Set constraints for the hosting view with the given width
+    hostingView.translatesAutoresizingMaskIntoConstraints = false
+    hostingView.widthAnchor.constraint(equalToConstant: width).isActive = true
+    
+    // Size the hosting view to fit its content
+    hostingView.setNeedsLayout()
+    hostingView.layoutIfNeeded()
+    
+    // Calculate the fitting size
+    let size = hostingView.systemLayoutSizeFitting(
+      CGSize(width: width, height: UIView.layoutFittingCompressedSize.height),
       withHorizontalFittingPriority: .required,
       verticalFittingPriority: .fittingSizeLevel
     )
-    return fittingSize.height
+    
+    // Return the calculated height
+    return size.height
   }
 }
