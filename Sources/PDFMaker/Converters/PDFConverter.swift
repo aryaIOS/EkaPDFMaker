@@ -186,11 +186,13 @@ public struct PDFRenderer {
     /// Height of header
     let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: pageSize.width)
     
+    print("Header height is \(headerHeight)")
+    
     /// Available height for the body
     let availableHeight = pageSize.height - headerHeight
     
     /// Scale down of the page
-    let heightRatio = CGFloat( CGFloat(availableHeight) / CGFloat(bodyHeight))
+    let heightRatio = Double( Double(availableHeight) / Double(bodyHeight))
     let scaleFactor = heightRatio < 1 ? heightRatio : 1
     
     print("Scale factor is \(scaleFactor)")
@@ -258,11 +260,12 @@ public struct PDFRenderer {
 extension PDFRenderer {
   func calculateHeight(for view: some View, givenWidth width: CGFloat) -> CGFloat {
     let hostingController = UIHostingController(rootView: view)
-    
-    hostingController.view.setNeedsLayout()
-    hostingController.view.layoutIfNeeded()
-    
-    let intrinsicSize = hostingController.view.intrinsicContentSize
-    return intrinsicSize.height
+    let targetSize = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
+    let fittingSize = hostingController.view.systemLayoutSizeFitting(
+      targetSize,
+      withHorizontalFittingPriority: .required,
+      verticalFittingPriority: .fittingSizeLevel
+    )
+    return fittingSize.height
   }
 }
