@@ -175,6 +175,7 @@ public struct PDFRenderer {
     bodyView: AnyView
   ) -> URL {
     let pageSize = PageSizing.a4.pageSize
+    let finalBodyView = bodyView.frame(maxWidth: pageSize.width)
     // TODO: - Arya break this to separate function
     /// 2: Save the rendered content to the documents directory
     let url = URL.documentsDirectory.appending(path: urlPathString)
@@ -204,7 +205,7 @@ public struct PDFRenderer {
     )
     
     let bodyRenderer = ImageRenderer(
-      content: bodyView.scaleEffect( /// To flip view upside down
+      content: finalBodyView.scaleEffect( /// To flip view upside down
         x: 1,
         y: -1,
         anchor: .center
