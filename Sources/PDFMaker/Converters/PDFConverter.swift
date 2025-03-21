@@ -192,7 +192,7 @@ public struct PDFRenderer {
     let availableHeight = pageSize.height - headerHeight
     
     /// Scale down of the page
-    let heightRatio = CGFloat( CGFloat(availableHeight) / CGFloat(bodyHeight))
+    let heightRatio = Double( Double(availableHeight) / Double(bodyHeight))
     let scaleFactor = heightRatio < 1 ? heightRatio : 1
     
     print("Scale factor is \(scaleFactor)")
