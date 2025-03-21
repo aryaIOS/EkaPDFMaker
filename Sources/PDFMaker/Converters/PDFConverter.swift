@@ -105,8 +105,9 @@ public struct PDFRenderer {
     bodyView: AnyView
   ) -> URL {
     let width = PageSizing.a4.pageSize.width
+    let finalBodyView = bodyView.frame(maxWidth: width)
     let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: width)
-    let bodyHeight = calculateHeight(for: AnyView(bodyView), givenWidth: width)
+    let bodyHeight = calculateHeight(for: AnyView(finalBodyView), givenWidth: width)
     let height = headerHeight + bodyHeight
     
     print("Header height is \(headerHeight)")
@@ -122,7 +123,7 @@ public struct PDFRenderer {
     )
     
     let bodyRenderer = ImageRenderer(
-      content: bodyView.scaleEffect( /// To flip view upside down
+      content: finalBodyView.scaleEffect( /// To flip view upside down
         x: 1,
         y: -1,
         anchor: .center
