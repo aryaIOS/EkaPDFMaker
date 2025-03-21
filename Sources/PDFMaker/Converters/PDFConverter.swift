@@ -10,7 +10,7 @@ public enum PageSizing {
   public var pageSize: CGSize {
     switch self {
     case .a4:
-      return CGSize(width: 595.2 , height: 841.8)
+      return CGSize(width: 595.0, height: 842.0)
     }
   }
 }
@@ -263,6 +263,6 @@ extension PDFRenderer {
     let hostingController = UIHostingController(rootView: view)
     let targetSize = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
     let fittingSize = hostingController.view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-    return fittingSize.height + 10 /// Extra for cutting
+    return fittingSize.height
   }
 }
