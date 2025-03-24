@@ -93,20 +93,12 @@ public struct PDFRenderer {
   
   public func renderSinglePageWithoutA4Constraints(
     urlPathString: String = UrlPath.url,
-    headerView: AnyView = AnyView(
-      DTPDFHeaderView(
-        data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData(
-          doctorName: "Dr. Kunal Katre",
-          clinicName: "Kunal's clinic",
-          address: "Bangalore"
-        )
-      )
-    ),
+    headerView: AnyView? = nil,
     bodyView: AnyView
   ) -> URL {
     let width = PageSizing.a4.pageSize.width
     let finalBodyView = bodyView.frame(maxWidth: width)
-    let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: width)
+    let headerHeight = headerView == nil ? 0 : calculateHeight(for: AnyView(headerView), givenWidth: width)
     let bodyHeight = calculateHeight(for: AnyView(finalBodyView), givenWidth: width)
     let height = headerHeight + bodyHeight
     
