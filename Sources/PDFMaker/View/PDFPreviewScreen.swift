@@ -27,35 +27,35 @@ public struct PDFPreviewScreen: View {
   
   public var body: some View {
     VStack(spacing: 0) {
-      ScrollView {
-        headerView
+//      ScrollView {
+//        headerView
+//        bodyView
+//      }
+//      if let headerView = headerView {
+//        GeometryReader { geometry in
+//          headerView
+//            .background(GeometryReader { geo in
+//              Color.clear
+//                .onAppear {
+//                  headerHeight = geo.size.height
+//                }
+//            })
+//        }
+//        .frame(height: headerHeight)
+//        .opacity(0)
+//      }
+      
+      GeometryReader { geometry in
         bodyView
+          .background(GeometryReader { geo in
+            Color.clear
+              .onAppear {
+                bodyHeight = geo.size.height
+              }
+          })
       }
-        if let headerView = headerView {
-          GeometryReader { geometry in
-            headerView
-              .background(GeometryReader { geo in
-                Color.clear
-                  .onAppear {
-                    headerHeight = geo.size.height
-                  }
-              })
-          }
-          .frame(height: headerHeight)
-          .opacity(0)
-        }
-        
-        GeometryReader { geometry in
-          bodyView
-            .background(GeometryReader { geo in
-              Color.clear
-                .onAppear {
-                  bodyHeight = geo.size.height
-                }
-            })
-        }
-        .frame(height: bodyHeight)
-        .opacity(0)
+      .frame(height: bodyHeight)
+//      .opacity(0)
     }
     .onAppear {
       generatePDF()
