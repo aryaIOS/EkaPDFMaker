@@ -17,7 +17,7 @@ public struct PDFPreviewScreen: View {
   public var headerView: AnyView?
   public var bodyView: AnyView
   
-  var body: some View {
+  public var body: some View {
     VStack(spacing: 0) {
       HStack {
         Spacer()
