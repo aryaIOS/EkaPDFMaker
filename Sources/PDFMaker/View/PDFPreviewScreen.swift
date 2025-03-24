@@ -51,6 +51,7 @@ public struct PDFPreviewScreen: View {
       
       GeometryReader { geometry in
         bodyView
+          .frame(width: PageSizing.a4.pageSize.width)
           .background(GeometryReader { geo in
             Color.clear
               .onAppear {
@@ -59,7 +60,7 @@ public struct PDFPreviewScreen: View {
               }
           })
       }
-      .frame(height: bodyHeight)
+      .frame(width: PageSizing.a4.pageSize.width, height: bodyHeight)
 //      .opacity(0)
     }
     .toolbar {
