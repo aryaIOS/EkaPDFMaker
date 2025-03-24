@@ -168,11 +168,7 @@ public struct PDFRenderer {
   
   public func renderSinglePage(
     urlPathString: String = UrlPath.url,
-    headerView: AnyView = AnyView(DTPDFHeaderView(data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData(
-      doctorName: "Dr. Kunal Katre",
-      clinicName: "Kunal's clinic",
-      address: "Bangalore"
-    ))),
+    headerView: AnyView? = nil,
     bodyView: AnyView
   ) -> URL {
     let pageSize = PageSizing.a4.pageSize
@@ -185,7 +181,7 @@ public struct PDFRenderer {
     print("Body height is \(bodyHeight)")
     
     /// Height of header
-    let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: pageSize.width)
+    let headerHeight = headerView == nil ? 0 : calculateHeight(for: AnyView(headerView), givenWidth: pageSize.width)
     
     print("Header height is \(headerHeight)")
     
@@ -236,8 +232,10 @@ public struct PDFRenderer {
       context.scaleBy(x: 1, y: -1) /// Flip the scale
       
       /// Render the header at the top
-      headerRenderer.render { size, renderer in
-        renderer(context)
+      if let headerView {
+        headerRenderer.render { size, renderer in
+          renderer(context)
+        }
       }
       
       context.translateBy(x: 0, y: headerHeight)
