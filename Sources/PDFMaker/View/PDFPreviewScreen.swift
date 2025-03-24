@@ -76,13 +76,19 @@ public struct PDFPreviewScreen: View {
   }
   
   private func renderAsImage() -> UIImage {
-    let hostingController = UIHostingController(rootView: self.body)
+    let hostingController = UIHostingController(rootView: VStack {
+      if let headerView = headerView {
+        headerView
+      }
+      bodyView
+    })
+    
     let targetSize = CGSize(width: UIScreen.main.bounds.width, height: headerHeight + bodyHeight)
     hostingController.view.bounds = CGRect(origin: .zero, size: targetSize)
     hostingController.view.backgroundColor = .clear
     
     let renderer = UIGraphicsImageRenderer(size: targetSize)
-    return renderer.image { _ in
+    return renderer.image { context in
       hostingController.view.drawHierarchy(in: hostingController.view.bounds, afterScreenUpdates: true)
     }
   }
