@@ -81,7 +81,7 @@ public struct PDFPreviewScreen: View {
   }
   
   private func sharePDF() {
-    guard let pdfURL = pdfURL else { return }
+    guard let pdfURL else { return }
     let activityController = UIActivityViewController(activityItems: [pdfURL], applicationActivities: nil)
     if let topController = UIApplication.shared.windows.first?.rootViewController {
       topController.present(activityController, animated: true, completion: nil)
