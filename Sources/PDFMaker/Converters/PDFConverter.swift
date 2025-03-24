@@ -259,11 +259,12 @@ public struct PDFRenderer {
 extension PDFRenderer {
   func calculateHeight(for view: some View, givenWidth width: CGFloat) -> CGFloat {
     let hostingController = UIHostingController(rootView: view)
-    
+    let targetSize = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
+    hostingController.view.bounds = CGRect(origin: .zero, size: targetSize)
     hostingController.view.setNeedsLayout()
     hostingController.view.layoutIfNeeded()
     
-    let intrinsicSize = hostingController.view.intrinsicContentSize
-    return intrinsicSize.height
+    let height = hostingController.sizeThatFits(in: targetSize).height
+    return height
   }
 }
