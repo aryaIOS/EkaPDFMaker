@@ -12,7 +12,11 @@ import PDFKit
 public struct PDFPreviewScreen: View {
   @State private var pdfURL: URL?
   @State private var headerHeight: CGFloat = 0
-  @State private var bodyHeight: CGFloat = 0
+  @State private var bodyHeight: CGFloat = 0 {
+    didSet {
+      print("Body Height: \(bodyHeight)")
+    }
+  }
   
   public var headerView: AnyView?
   public var bodyView: AnyView
@@ -51,14 +55,12 @@ public struct PDFPreviewScreen: View {
             Color.clear
               .onAppear {
                 bodyHeight = geo.size.height
+                generatePDF()
               }
           })
       }
       .frame(height: bodyHeight)
 //      .opacity(0)
-    }
-    .onAppear {
-      generatePDF()
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
