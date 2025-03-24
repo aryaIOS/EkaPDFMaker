@@ -27,41 +27,46 @@ public struct PDFPreviewScreen: View {
   
   public var body: some View {
     VStack(spacing: 0) {
-      HStack {
-        Spacer()
-        Button(action: sharePDF) {
-          Image(systemName: "square.and.arrow.up")
-            .padding()
+      ScrollView {
+        headerView
+        bodyView
+        
+        if let headerView = headerView {
+          GeometryReader { geometry in
+            headerView
+              .background(GeometryReader { geo in
+                Color.clear
+                  .onAppear {
+                    headerHeight = geo.size.height
+                  }
+              })
+          }
+          .frame(height: headerHeight)
+          .opacity(0)
         }
-      }
-      .background(Color.white)
-      
-      if let headerView = headerView {
+        
         GeometryReader { geometry in
-          headerView
+          bodyView
             .background(GeometryReader { geo in
               Color.clear
                 .onAppear {
-                  headerHeight = geo.size.height
+                  bodyHeight = geo.size.height
                 }
             })
         }
-        .frame(height: headerHeight)
+        .frame(height: bodyHeight)
+        .opacity(0)
       }
-      
-      GeometryReader { geometry in
-        bodyView
-          .background(GeometryReader { geo in
-            Color.clear
-              .onAppear {
-                bodyHeight = geo.size.height
-              }
-          })
-      }
-      .frame(height: bodyHeight)
     }
     .onAppear {
       generatePDF()
+    }
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button(action: sharePDF) {
+          Image(systemName: "square.and.arrow.up")
+        }
+      }
     }
   }
   
