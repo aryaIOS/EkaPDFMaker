@@ -108,7 +108,8 @@ public struct PDFRenderer {
     let finalBodyView = bodyView.frame(maxWidth: width)
     let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: width)
     let bodyHeight = calculateHeight(for: AnyView(finalBodyView), givenWidth: width)
-    let height = 2*headerHeight + bodyHeight
+    let finalHeaderHeight = bodyHeight > PageSizing.a4.pageSize.height ? 2*headerHeight : headerHeight
+    let height = finalHeaderHeight + bodyHeight
     
     print("Header height is \(headerHeight)")
     print("Body Height is \(bodyHeight)")
@@ -151,7 +152,7 @@ public struct PDFRenderer {
         renderer(context)
       }
       
-      context.translateBy(x: 0, y: 2*headerHeight)
+      context.translateBy(x: 0, y: finalHeaderHeight)
       
       bodyRenderer.render { size, renderer in
         renderer(context)
