@@ -17,6 +17,14 @@ public struct PDFPreviewScreen: View {
   public var headerView: AnyView?
   public var bodyView: AnyView
   
+  public init(
+    headerView: AnyView? = nil,
+    bodyView: AnyView
+  ) {
+    self.headerView = headerView
+    self.bodyView = bodyView
+  }
+  
   public var body: some View {
     VStack(spacing: 0) {
       HStack {
