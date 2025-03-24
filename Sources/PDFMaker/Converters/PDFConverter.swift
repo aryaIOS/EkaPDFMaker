@@ -276,7 +276,7 @@ public struct PDFRenderer {
        let context = CGContext(consumer: consumer, mediaBox: nil, nil) {
       
       /// Correct media box size with total height
-      var mediaBox = CGRect(origin: CGPoint(x: 0, y: PageSizing.a4.pageSize.height), size: CGSize(width: width, height: height))
+      var mediaBox = CGRect(origin: .zero, size: CGSize(width: width, height: height))
       context.beginPage(mediaBox: &mediaBox)
       context.saveGState()
       
