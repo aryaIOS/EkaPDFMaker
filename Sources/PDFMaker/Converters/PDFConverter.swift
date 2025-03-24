@@ -246,6 +246,92 @@ public struct PDFRenderer {
     
     return url
   }
+  
+  public func getPdfUrl(
+    urlPathString: String = UrlPath.url,
+    headerView: AnyView? = nil,
+    bodyView: AnyView,
+    headerHeight: CGFloat,
+    bodyHeight: CGFloat
+  ) -> URL {
+    let pageSize = PageSizing.a4.pageSize
+    let finalBodyView = bodyView.frame(maxWidth: pageSize.width)
+    // TODO: - Arya break this to separate function
+    /// 2: Save the rendered content to the documents directory
+    let url = URL.documentsDirectory.appending(path: urlPathString)
+    let bodyHeight = calculateHeight(for: finalBodyView, givenWidth: pageSize.width)
+    
+    print("Body height is \(bodyHeight)")
+    
+    print("Header height is \(headerHeight)")
+    
+    /// Available height for the body
+    let availableHeight = pageSize.height - headerHeight
+    
+    /// Scale down of the page
+    let heightRatio = Double( Double(availableHeight) / Double(bodyHeight))
+    let scaleFactor = heightRatio < 1 ? heightRatio : 1
+    
+    print("Scale factor is \(scaleFactor)")
+    
+    // Create an ImageRenderer for both the header and the content
+    let headerRenderer = ImageRenderer(
+      content: headerView.scaleEffect( /// To flip view upside down
+        x: 1,
+        y: -1,
+        anchor: .center
+                                     )
+    )
+    
+    let bodyRenderer = ImageRenderer(
+      content: finalBodyView.scaleEffect( /// To flip view upside down
+        x: 1,
+        y: -1,
+        anchor: .center
+                                        )
+      .scaleEffect( /// To scale down the body with respect to the page view
+        x: scaleFactor,
+        y: scaleFactor,
+        anchor: .bottomLeading
+                  )
+    )
+    
+    if let consumer = CGDataConsumer(url: url as CFURL),
+       let context = CGContext(consumer: consumer, mediaBox: nil, nil) {
+      
+      /// By default the media box renders items at the bottom
+      var mediaBox = CGRect(origin: .init(x: 0, y: 0), size: CGSize( width: pageSize.width, height: pageSize.height))
+      context.beginPage(mediaBox: &mediaBox)
+      /// Save the state
+      context.saveGState()
+      
+      /// Transformation of the coordinate system
+      /// Note however this will render the contents upside down
+      /// You have to flip the views beforehand to ensure the coordinates are correct
+      context.translateBy(x: 0, y: pageSize.height) /// Move the items up
+      context.scaleBy(x: 1, y: -1) /// Flip the scale
+      
+      /// Render the header at the top
+      if headerView != nil {
+        headerRenderer.render { size, renderer in
+          renderer(context)
+        }
+      }
+      
+      context.translateBy(x: 0, y: headerHeight)
+      
+      bodyRenderer.render { size, renderer in
+        renderer(context)
+      }
+      
+      // Restore and close the PDF context
+      context.restoreGState()
+      context.endPDFPage()
+      context.closePDF()
+    }
+    
+    return url
+  }
 }
 
 @MainActor

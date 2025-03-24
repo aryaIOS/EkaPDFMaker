@@ -66,22 +66,13 @@ public struct PDFPreviewScreen: View {
   }
   
   private func generatePDF() {
-    let pdfDocument = PDFDocument()
-    guard let renderedImage = renderAsImage() else {
-      debugPrint("Could not render image")
-      return
-    }
-    let pdfPage = PDFPage(image: renderedImage)
-    pdfDocument.insert(pdfPage!, at: 0)
-    
-    let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("preview.pdf")
-    pdfDocument.write(to: tempURL)
-    pdfURL = tempURL
-  }
-  
-  private func renderAsImage() -> UIImage? {
-    let renderer = ImageRenderer(content: self.body)
-    return renderer.uiImage
+    let url = PDFRenderer().getPdfUrl(
+      headerView: headerView,
+      bodyView: bodyView,
+      headerHeight: headerHeight,
+      bodyHeight: bodyHeight
+    )
+    pdfURL = url
   }
   
   private func sharePDF() {
