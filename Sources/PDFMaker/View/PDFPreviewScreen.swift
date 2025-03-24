@@ -67,7 +67,11 @@ public struct PDFPreviewScreen: View {
   
   private func generatePDF() {
     let pdfDocument = PDFDocument()
-    let pdfPage = PDFPage(image: renderAsImage())
+    guard let renderedImage = renderAsImage() else {
+      debugPrint("Could not render image")
+      return
+    }
+    let pdfPage = PDFPage(image: renderedImage)
     pdfDocument.insert(pdfPage!, at: 0)
     
     let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("preview.pdf")
@@ -75,22 +79,9 @@ public struct PDFPreviewScreen: View {
     pdfURL = tempURL
   }
   
-  private func renderAsImage() -> UIImage {
-    let hostingController = UIHostingController(rootView: VStack {
-      if let headerView = headerView {
-        headerView
-      }
-      bodyView
-    })
-    
-    let targetSize = CGSize(width: UIScreen.main.bounds.width, height: headerHeight + bodyHeight)
-    hostingController.view.bounds = CGRect(origin: .zero, size: targetSize)
-    hostingController.view.backgroundColor = .clear
-    
-    let renderer = UIGraphicsImageRenderer(size: targetSize)
-    return renderer.image { context in
-      hostingController.view.drawHierarchy(in: hostingController.view.bounds, afterScreenUpdates: true)
-    }
+  private func renderAsImage() -> UIImage? {
+    let renderer = ImageRenderer(content: self.body)
+    return renderer.uiImage
   }
   
   private func sharePDF() {
