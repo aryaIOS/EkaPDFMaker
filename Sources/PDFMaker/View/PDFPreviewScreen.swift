@@ -9,13 +9,13 @@
 import SwiftUI
 import PDFKit
 
-struct PDFPreviewScreen: View {
+public struct PDFPreviewScreen: View {
   @State private var pdfURL: URL?
   @State private var headerHeight: CGFloat = 0
   @State private var bodyHeight: CGFloat = 0
   
-  var headerView: AnyView?
-  var bodyView: AnyView
+  public var headerView: AnyView?
+  public var bodyView: AnyView
   
   var body: some View {
     VStack(spacing: 0) {
