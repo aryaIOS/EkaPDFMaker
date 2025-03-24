@@ -30,7 +30,7 @@ public struct PDFPreviewScreen: View {
       ScrollView {
         headerView
         bodyView
-        
+      }
         if let headerView = headerView {
           GeometryReader { geometry in
             headerView
@@ -56,7 +56,6 @@ public struct PDFPreviewScreen: View {
         }
         .frame(height: bodyHeight)
         .opacity(0)
-      }
     }
     .onAppear {
       generatePDF()
