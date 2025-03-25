@@ -224,7 +224,7 @@ public struct PDFRenderer {
         .scaleEffect( /// To scale down the body with respect to the page view
           x: scaleFactor,
           y: scaleFactor,
-          anchor: .bottomLeading
+          anchor: .topLeading
                     )
     )
 
