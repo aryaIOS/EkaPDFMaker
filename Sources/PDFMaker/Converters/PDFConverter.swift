@@ -181,7 +181,7 @@ public struct PDFRenderer {
     // TODO: - Arya break this to separate function
     /// 2: Save the rendered content to the documents directory
     let url = URL.documentsDirectory.appending(path: urlPathString)
-    let bodyHeight = calculateHeight(for: bodyView, givenWidth: pageSize.width)
+    let bodyHeight = calculateHeight(for: finalBodyView, givenWidth: pageSize.width)
     
     print("Body height is \(bodyHeight)")
     let isBodyBiggerThanPageHeight: Bool = bodyHeight > PageSizing.a4.pageSize.height
@@ -221,14 +221,14 @@ public struct PDFRenderer {
 //    )
     let bodyRenderer = ImageRenderer(
       content: finalBodyView
-        .scaleEffect(scaleFactor)
+        .scaleEffect(x: scaleFactor, y: scaleFactor, anchor: .topLeading)
     )
 
     if let consumer = CGDataConsumer(url: url as CFURL),
        let context = CGContext(consumer: consumer, mediaBox: nil, nil) {
       
       /// By default the media box renders items at the bottom
-      var mediaBox = CGRect(origin: .init(x: 0, y: 0), size: CGSize( width: pageSize.width, height: pageSize.height))
+      var mediaBox = CGRect(origin: .zero, size: pageSize)
       context.beginPage(mediaBox: &mediaBox)
       /// Save the state
       context.saveGState()
