@@ -169,11 +169,11 @@ public struct PDFRenderer {
   
   public func renderSinglePage(
     urlPathString: String = UrlPath.url,
-    headerView: AnyView = AnyView(DTPDFHeaderView(data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData(
-      doctorName: "Dr. Kunal Katre",
-      clinicName: "Kunal's clinic",
-      address: "Bangalore"
-    ))),
+//    headerView: AnyView = AnyView(DTPDFHeaderView(data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData(
+//      doctorName: "Dr. Kunal Katre",
+//      clinicName: "Kunal's clinic",
+//      address: "Bangalore"
+//    ))),
     bodyView: AnyView
   ) -> URL {
     let pageSize = PageSizing.a4.pageSize
@@ -184,12 +184,13 @@ public struct PDFRenderer {
     let bodyHeight = calculateHeight(for: bodyView, givenWidth: pageSize.width)
     
     print("Body height is \(bodyHeight)")
+    let isBodyBiggerThanPageHeight: Bool = bodyHeight > PageSizing.a4.pageSize.height
     
     /// Height of header
-    let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: pageSize.width)
+//    let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: pageSize.width)
     
     /// Available height for the body
-    let availableHeight = pageSize.height - headerHeight
+    let availableHeight = pageSize.height
     
     /// Scale down of the page
     let heightRatio = CGFloat( CGFloat(availableHeight) / CGFloat(bodyHeight))
@@ -198,13 +199,13 @@ public struct PDFRenderer {
     print("Scale factor is \(scaleFactor)")
     
     // Create an ImageRenderer for both the header and the content
-    let headerRenderer = ImageRenderer(
-      content: headerView.scaleEffect( /// To flip view upside down
-        x: 1,
-        y: -1,
-        anchor: .center
-      )
-    )
+//    let headerRenderer = ImageRenderer(
+//      content: headerView.scaleEffect( /// To flip view upside down
+//        x: 1,
+//        y: -1,
+//        anchor: .center
+//      )
+//    )
     
     let bodyRenderer = ImageRenderer(
       content: finalBodyView.scaleEffect( /// To flip view upside down
@@ -231,15 +232,15 @@ public struct PDFRenderer {
       /// Transformation of the coordinate system
       /// Note however this will render the contents upside down
       /// You have to flip the views beforehand to ensure the coordinates are correct
-      context.translateBy(x: 0, y: pageSize.height) /// Move the items up
-      context.scaleBy(x: 1, y: -1) /// Flip the scale
+//      context.translateBy(x: 0, y: pageSize.height) /// Move the items up
+//      context.scaleBy(x: 1, y: -1) /// Flip the scale
       
-      /// Render the header at the top
-      headerRenderer.render { size, renderer in
-        renderer(context)
-      }
-      
-      context.translateBy(x: 0, y: headerHeight)
+//      /// Render the header at the top
+//      headerRenderer.render { size, renderer in
+//        renderer(context)
+//      }
+//      
+//      context.translateBy(x: 0, y: headerHeight)
       
       bodyRenderer.render { size, renderer in
         renderer(context)
