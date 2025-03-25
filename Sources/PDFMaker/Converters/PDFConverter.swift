@@ -223,9 +223,7 @@ public struct PDFRenderer {
       content: finalBodyView
         .scaleEffect( /// To scale down the body with respect to the page view
           x: scaleFactor,
-          y: scaleFactor,
-          anchor: .topLeading
-                    )
+          y: scaleFactor)
     )
 
     if let consumer = CGDataConsumer(url: url as CFURL),
