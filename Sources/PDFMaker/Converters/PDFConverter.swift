@@ -207,18 +207,19 @@ public struct PDFRenderer {
 //      )
 //    )
     
-    let bodyRenderer = ImageRenderer(
-      content: finalBodyView.scaleEffect( /// To flip view upside down
-        x: 1,
-        y: -1,
-        anchor: .center
-      )
-      .scaleEffect( /// To scale down the body with respect to the page view
-        x: scaleFactor,
-        y: scaleFactor,
-        anchor: .bottomLeading
-      )
-    )
+//    let bodyRenderer = ImageRenderer(
+//      content: finalBodyView.scaleEffect( /// To flip view upside down
+//        x: 1,
+//        y: -1,
+//        anchor: .center
+//      )
+//      .scaleEffect( /// To scale down the body with respect to the page view
+//        x: scaleFactor,
+//        y: scaleFactor,
+//        anchor: .bottomLeading
+//      )
+//    )
+    let bodyRenderer = ImageRenderer(content: finalBodyView)
 
     if let consumer = CGDataConsumer(url: url as CFURL),
        let context = CGContext(consumer: consumer, mediaBox: nil, nil) {
