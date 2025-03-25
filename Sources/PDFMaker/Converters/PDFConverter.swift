@@ -219,7 +219,14 @@ public struct PDFRenderer {
 //        anchor: .bottomLeading
 //      )
 //    )
-    let bodyRenderer = ImageRenderer(content: finalBodyView)
+    let bodyRenderer = ImageRenderer(
+      content: finalBodyView
+        .scaleEffect( /// To scale down the body with respect to the page view
+          x: scaleFactor,
+          y: scaleFactor,
+          anchor: .bottomLeading
+                    )
+    )
 
     if let consumer = CGDataConsumer(url: url as CFURL),
        let context = CGContext(consumer: consumer, mediaBox: nil, nil) {
