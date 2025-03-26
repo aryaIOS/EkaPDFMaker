@@ -216,12 +216,15 @@ public struct PDFRenderer {
       context.beginPage(mediaBox: &mediaBox)
       context.saveGState()
       
-      context.translateBy(x: 0, y: pageSize.height - headerHeight)
+      context.translateBy(x: 0, y: pageSize.height) /// Move the items up
+      context.scaleBy(x: 1, y: -1) /// Flip the scale
 
       bodyRenderer.render { size, renderer in
         renderer(context)
       }
             
+      context.translateBy(x: 0, y: headerHeight)
+      
       headerRenderer.render { size, renderer in
         renderer(context)
       }
