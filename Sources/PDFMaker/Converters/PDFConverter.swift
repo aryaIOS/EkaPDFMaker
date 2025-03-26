@@ -190,23 +190,23 @@ public struct PDFRenderer {
     let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: pageSize.width)
     
     /// Available height for the body
-    let availableHeight = pageSize.height
-    let adjustedHeaderHeight = isBodyBiggerThanPageHeight ? 200 : headerHeight + 30
-    let adjustedBodyHeight = isBodyBiggerThanPageHeight ? bodyHeight + 300 : bodyHeight
+    let availableHeight = pageSize.height - headerHeight
+    let adjustedBodyHeight = isBodyBiggerThanPageHeight ? bodyHeight + 100 : bodyHeight
     /// Scale down of the page
     let heightRatio = CGFloat( CGFloat(availableHeight) / CGFloat(adjustedBodyHeight))
-    let scaleFactor = heightRatio < 1 ? heightRatio : 1
+    let scaleFactor = min(heightRatio, 1)
     
     print("Scale factor is \(scaleFactor)")
     
-    // Create an ImageRenderer for both the header and the content
-//    let headerRenderer = ImageRenderer(
-//      content: headerView.scaleEffect( /// To flip view upside down
-//        x: 1,
-//        y: -1,
-//        anchor: .center
-//                                     )
-//    )
+    /// Create an ImageRenderer for both the header and the content
+    let headerRenderer = ImageRenderer(
+      content: headerView.scaleEffect( /// To flip view upside down
+        x: 1,
+        y: -1,
+        anchor: .center
+                                     )
+      .frame(height: headerHeight, alignment: .bottomLeading)
+    )
     
     let bodyRenderer = ImageRenderer(
       content: finalBodyView.scaleEffect( /// To flip view upside down
@@ -214,7 +214,8 @@ public struct PDFRenderer {
         y: -1,
         anchor: .center
                                         )
-        .scaleEffect(x: scaleFactor, y: scaleFactor, anchor: .bottomLeading)
+      .scaleEffect(x: scaleFactor, y: scaleFactor, anchor: .bottomLeading)
+      .frame(width: pageSize.width, height: availableHeight, alignment: .bottomLeading)
     )
 
     if let consumer = CGDataConsumer(url: url as CFURL),
@@ -226,14 +227,14 @@ public struct PDFRenderer {
       context.beginPage(mediaBox: &mediaBox)
       context.saveGState()
       
-//      context.translateBy(x: 0, y: pageSize.height) /// Move the items up
-//      context.scaleBy(x: 1, y: -1) /// Flip the scale
+      context.translateBy(x: 0, y: pageSize.height) /// Move the items up
+      context.scaleBy(x: 1, y: -1) /// Flip the scale
 
-//      headerRenderer.render { size, renderer in
-//        renderer(context)
-//      }
+      headerRenderer.render { size, renderer in
+        renderer(context)
+      }
       
-//      context.translateBy(x: 0, y: adjustedHeaderHeight)
+      context.translateBy(x: 0, y: headerHeight)
       
       bodyRenderer.render { size, renderer in
         renderer(context)
