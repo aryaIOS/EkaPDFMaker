@@ -227,30 +227,54 @@ public struct PDFRenderer {
 //    )
     let bodyRenderer = ImageRenderer(
       content: finalBodyView
-        .scaleEffect(x: 0.8, y: 0.8, anchor: .topLeading)
     )
 
-    if let consumer = CGDataConsumer(url: url as CFURL),
-       let context = CGContext(consumer: consumer, mediaBox: nil, nil) {
-      
-      /// By default the media box renders items at the bottom
-      var mediaBox = CGRect(origin: .zero, size: pageSize)
-      context.beginPage(mediaBox: &mediaBox)
-      /// Save the state
-      context.saveGState()
-      
-      /// Transformation of the coordinate system
-      /// Note however this will render the contents upside down
-      /// You have to flip the views beforehand to ensure the coordinates are correct
-//      context.translateBy(x: 0, y: pageSize.height) /// Move the items up
-//      context.scaleBy(x: 1, y: -1) /// Flip the scale
-      
-//      /// Render the header at the top
-//      headerRenderer.render { size, renderer in
+//    if let consumer = CGDataConsumer(url: url as CFURL),
+//       let context = CGContext(consumer: consumer, mediaBox: nil, nil) {
+//      
+//      /// By default the media box renders items at the bottom
+//      var mediaBox = CGRect(origin: .zero, size: pageSize)
+//      context.beginPage(mediaBox: &mediaBox)
+//      /// Save the state
+//      context.saveGState()
+//      
+//      /// Transformation of the coordinate system
+//      /// Note however this will render the contents upside down
+//      /// You have to flip the views beforehand to ensure the coordinates are correct
+////      context.translateBy(x: 0, y: pageSize.height) /// Move the items up
+////      context.scaleBy(x: 1, y: -1) /// Flip the scale
+//      
+////      /// Render the header at the top
+////      headerRenderer.render { size, renderer in
+////        renderer(context)
+////      }
+////      
+////      context.translateBy(x: 0, y: headerHeight)
+//      
+//      bodyRenderer.render { size, renderer in
 //        renderer(context)
 //      }
 //      
-//      context.translateBy(x: 0, y: headerHeight)
+//      // Restore and close the PDF context
+//      context.restoreGState()
+//      context.endPDFPage()
+//      context.closePDF()
+//    }
+    if let consumer = CGDataConsumer(url: url as CFURL),
+       let context = CGContext(consumer: consumer, mediaBox: nil, nil) {
+      
+      // Create media box with explicit positioning
+      var mediaBox = CGRect(origin: .zero, size: pageSize)
+      
+      context.beginPage(mediaBox: &mediaBox)
+      context.saveGState()
+      
+      // Flip the coordinate system to match typical view coordinates
+      context.translateBy(x: 0, y: pageSize.height)
+      context.scaleBy(x: 1, y: -1)
+      
+      // Apply scaling transformation
+      context.scaleBy(x: scaleFactor, y: scaleFactor)
       
       bodyRenderer.render { size, renderer in
         renderer(context)
