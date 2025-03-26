@@ -271,8 +271,8 @@ public struct PDFRenderer {
       context.saveGState()
       
       // Flip the coordinate system to match typical view coordinates
-      context.translateBy(x: 0, y: pageSize.height)
-      context.scaleBy(x: 1, y: -1)
+//      context.translateBy(x: 0, y: pageSize.height)
+//      context.scaleBy(x: 1, y: -1)
       
 //      // Apply scaling transformation
 //      context.scaleBy(x: scaleFactor, y: scaleFactor)
