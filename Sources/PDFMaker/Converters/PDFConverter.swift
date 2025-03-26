@@ -169,11 +169,11 @@ public struct PDFRenderer {
   
   public func renderSinglePage(
     urlPathString: String = UrlPath.url,
-//    headerView: AnyView = AnyView(DTPDFHeaderView(data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData(
-//      doctorName: "Dr. Kunal Katre",
-//      clinicName: "Kunal's clinic",
-//      address: "Bangalore"
-//    ))),
+    headerView: AnyView = AnyView(DTPDFHeaderView(data: DTPDFHeaderViewData.formDeepthoughtHeaderViewData(
+      doctorName: "Dr. Kunal Katre",
+      clinicName: "Kunal's clinic",
+      address: "Bangalore"
+    ))),
     bodyView: AnyView
   ) -> URL {
     let pageSize = PageSizing.a4.pageSize
@@ -181,17 +181,17 @@ public struct PDFRenderer {
     // TODO: - Arya break this to separate function
     /// 2: Save the rendered content to the documents directory
     let url = URL.documentsDirectory.appending(path: urlPathString)
-    let bodyHeight = calculateHeight(for: finalBodyView, givenWidth: pageSize.width) + 60
+    let bodyHeight = calculateHeight(for: finalBodyView, givenWidth: pageSize.width)
     
     print("Body height is \(bodyHeight)")
     let isBodyBiggerThanPageHeight: Bool = bodyHeight > PageSizing.a4.pageSize.height
     
     /// Height of header
-//    let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: pageSize.width)
+    let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: pageSize.width)
     
     /// Available height for the body
     let availableHeight = pageSize.height
-    
+    let adjustedBodyHeight = isBodyBiggerThanPageHeight ? bodyHeight + 60 : bodyHeight
     /// Scale down of the page
     let heightRatio = CGFloat( CGFloat(availableHeight) / CGFloat(bodyHeight))
     let scaleFactor = heightRatio < 1 ? heightRatio : 1
@@ -199,26 +199,14 @@ public struct PDFRenderer {
     print("Scale factor is \(scaleFactor)")
     
     // Create an ImageRenderer for both the header and the content
-//    let headerRenderer = ImageRenderer(
-//      content: headerView.scaleEffect( /// To flip view upside down
-//        x: 1,
-//        y: -1,
-//        anchor: .center
-//      )
-//    )
+    let headerRenderer = ImageRenderer(
+      content: headerView.scaleEffect( /// To flip view upside down
+        x: 1,
+        y: -1,
+        anchor: .center
+      )
+    )
     
-//    let bodyRenderer = ImageRenderer(
-//      content: finalBodyView.scaleEffect( /// To flip view upside down
-//        x: 1,
-//        y: -1,
-//        anchor: .center
-//      )
-//      .scaleEffect( /// To scale down the body with respect to the page view
-//        x: scaleFactor,
-//        y: scaleFactor,
-//        anchor: .bottomLeading
-//      )
-//    )
     let bodyRenderer = ImageRenderer(
       content: finalBodyView
         .scaleEffect(x: scaleFactor, y: scaleFactor, anchor: .bottomLeading)
