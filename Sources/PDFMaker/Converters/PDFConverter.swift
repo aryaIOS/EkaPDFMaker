@@ -191,7 +191,7 @@ public struct PDFRenderer {
     
     /// Available height for the body
     let availableHeight = pageSize.height
-    let adjustedBodyHeight = isBodyBiggerThanPageHeight ? bodyHeight + 200 : bodyHeight
+    let adjustedBodyHeight = isBodyBiggerThanPageHeight ? bodyHeight + 60 + headerHeight : bodyHeight
     /// Scale down of the page
     let heightRatio = CGFloat( CGFloat(availableHeight) / CGFloat(bodyHeight))
     let scaleFactor = heightRatio < 1 ? heightRatio : 1
@@ -217,15 +217,15 @@ public struct PDFRenderer {
       context.beginPage(mediaBox: &mediaBox)
       context.saveGState()
       
-      /// Render the header at the top
-      headerRenderer.render { size, renderer in
-        renderer(context)
-      }
-      
       bodyRenderer.render { size, renderer in
         renderer(context)
       }
       
+      context.translateBy(x: 0, y: pageSize.height - headerHeight)
+      
+      headerRenderer.render { size, renderer in
+        renderer(context)
+      }
       // Restore and close the PDF context
       context.restoreGState()
       context.endPDFPage()
