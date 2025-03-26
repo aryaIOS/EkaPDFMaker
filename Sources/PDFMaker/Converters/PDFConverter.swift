@@ -199,11 +199,19 @@ public struct PDFRenderer {
     
     // Create an ImageRenderer for both the header and the content
     let headerRenderer = ImageRenderer(
-      content: headerView
+      content: headerView.scaleEffect( /// To flip view upside down
+        x: 1,
+        y: -1,
+        anchor: .center
+                                     )
     )
     
     let bodyRenderer = ImageRenderer(
-      content: finalBodyView
+      content: finalBodyView.scaleEffect( /// To flip view upside down
+        x: 1,
+        y: -1,
+        anchor: .center
+                                        )
         .scaleEffect(x: scaleFactor, y: scaleFactor, anchor: .bottomLeading)
     )
 
