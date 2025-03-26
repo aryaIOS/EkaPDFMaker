@@ -181,29 +181,31 @@ public struct PDFRenderer {
     // TODO: - Arya break this to separate function
     /// 2: Save the rendered content to the documents directory
     let url = URL.documentsDirectory.appending(path: urlPathString)
-    let bodyHeight = calculateHeight(for: bodyView, givenWidth: pageSize.width)
+    let bodyHeight = calculateHeight(for: finalBodyView, givenWidth: pageSize.width)
     
     print("Body height is \(bodyHeight)")
+    let isBodyBiggerThanPageHeight: Bool = bodyHeight > PageSizing.a4.pageSize.height
     
     /// Height of header
     let headerHeight = calculateHeight(for: AnyView(headerView), givenWidth: pageSize.width)
     
     /// Available height for the body
     let availableHeight = pageSize.height - headerHeight
-    
+    let adjustedBodyHeight = isBodyBiggerThanPageHeight ? bodyHeight + 100 : bodyHeight
     /// Scale down of the page
-    let heightRatio = CGFloat( CGFloat(availableHeight) / CGFloat(bodyHeight))
-    let scaleFactor = heightRatio < 1 ? heightRatio : 1
+    let heightRatio = CGFloat( CGFloat(availableHeight) / CGFloat(adjustedBodyHeight))
+    let scaleFactor = min(heightRatio, 1)
     
     print("Scale factor is \(scaleFactor)")
     
-    // Create an ImageRenderer for both the header and the content
+    /// Create an ImageRenderer for both the header and the content
     let headerRenderer = ImageRenderer(
       content: headerView.scaleEffect( /// To flip view upside down
         x: 1,
         y: -1,
         anchor: .center
-      )
+                                     )
+      .frame(height: headerHeight, alignment: .bottomLeading)
     )
     
     let bodyRenderer = ImageRenderer(
@@ -211,30 +213,23 @@ public struct PDFRenderer {
         x: 1,
         y: -1,
         anchor: .center
-      )
-      .scaleEffect( /// To scale down the body with respect to the page view
-        x: scaleFactor,
-        y: scaleFactor,
-        anchor: .bottomLeading
-      )
+                                        )
+      .scaleEffect(x: scaleFactor, y: scaleFactor, anchor: .bottomLeading)
+      .frame(width: pageSize.width, height: availableHeight, alignment: .bottomLeading)
     )
 
     if let consumer = CGDataConsumer(url: url as CFURL),
        let context = CGContext(consumer: consumer, mediaBox: nil, nil) {
       
-      /// By default the media box renders items at the bottom
-      var mediaBox = CGRect(origin: .init(x: 0, y: 0), size: CGSize( width: pageSize.width, height: pageSize.height))
+      // Create media box with explicit positioning
+      var mediaBox = CGRect(origin: .zero, size: pageSize)
+      
       context.beginPage(mediaBox: &mediaBox)
-      /// Save the state
       context.saveGState()
       
-      /// Transformation of the coordinate system
-      /// Note however this will render the contents upside down
-      /// You have to flip the views beforehand to ensure the coordinates are correct
       context.translateBy(x: 0, y: pageSize.height) /// Move the items up
       context.scaleBy(x: 1, y: -1) /// Flip the scale
-      
-      /// Render the header at the top
+
       headerRenderer.render { size, renderer in
         renderer(context)
       }
