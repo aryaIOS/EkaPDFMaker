@@ -177,7 +177,13 @@ public struct PDFRenderer {
     bodyView: AnyView
   ) -> URL {
     let pageSize = PageSizing.a4.pageSize
-    let finalBodyView = bodyView.frame(width: pageSize.width, alignment: .topLeading)
+    let finalBodyView = VStack {
+      HStack {
+        bodyView.frame(width: pageSize.width)
+        Spacer()
+      }
+      Spacer()
+    }
     // TODO: - Arya break this to separate function
     /// 2: Save the rendered content to the documents directory
     let url = URL.documentsDirectory.appending(path: urlPathString)
