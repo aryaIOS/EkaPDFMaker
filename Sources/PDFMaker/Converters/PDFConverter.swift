@@ -200,13 +200,13 @@ public struct PDFRenderer {
     print("Scale factor is \(scaleFactor)")
     
     // Create an ImageRenderer for both the header and the content
-    let headerRenderer = ImageRenderer(
-      content: headerView.scaleEffect( /// To flip view upside down
-        x: 1,
-        y: -1,
-        anchor: .center
-                                     )
-    )
+//    let headerRenderer = ImageRenderer(
+//      content: headerView.scaleEffect( /// To flip view upside down
+//        x: 1,
+//        y: -1,
+//        anchor: .center
+//                                     )
+//    )
     
     let bodyRenderer = ImageRenderer(
       content: finalBodyView.scaleEffect( /// To flip view upside down
@@ -229,11 +229,11 @@ public struct PDFRenderer {
       context.translateBy(x: 0, y: pageSize.height) /// Move the items up
       context.scaleBy(x: 1, y: -1) /// Flip the scale
 
-      headerRenderer.render { size, renderer in
-        renderer(context)
-      }
+//      headerRenderer.render { size, renderer in
+//        renderer(context)
+//      }
       
-      context.translateBy(x: 0, y: adjustedHeaderHeight)
+//      context.translateBy(x: 0, y: adjustedHeaderHeight)
       
       bodyRenderer.render { size, renderer in
         renderer(context)
