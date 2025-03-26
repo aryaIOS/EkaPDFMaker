@@ -177,17 +177,11 @@ public struct PDFRenderer {
     bodyView: AnyView
   ) -> URL {
     let pageSize = PageSizing.a4.pageSize
-    let finalBodyView = VStack {
-      HStack {
-        bodyView.frame(width: pageSize.width)
-        Spacer()
-      }
-      Spacer()
-    }
+    let finalBodyView = bodyView.frame(width: pageSize.width)
     // TODO: - Arya break this to separate function
     /// 2: Save the rendered content to the documents directory
     let url = URL.documentsDirectory.appending(path: urlPathString)
-    let bodyHeight = calculateHeight(for: finalBodyView, givenWidth: pageSize.width)
+    let bodyHeight = calculateHeight(for: finalBodyView, givenWidth: pageSize.width) + 60
     
     print("Body height is \(bodyHeight)")
     let isBodyBiggerThanPageHeight: Bool = bodyHeight > PageSizing.a4.pageSize.height
