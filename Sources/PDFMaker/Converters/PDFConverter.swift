@@ -227,7 +227,7 @@ public struct PDFRenderer {
       context.saveGState()
       
       context.translateBy(x: 0, y: pageSize.height) /// Move the items up
-      context.scaleBy(x: 1, y: -1) /// Flip the scale
+//      context.scaleBy(x: 1, y: -1) /// Flip the scale
 
 //      headerRenderer.render { size, renderer in
 //        renderer(context)
